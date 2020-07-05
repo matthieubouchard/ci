@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          DEPLOYED!!
+          DEPLOYED!! from branch
         </a>
       </header>
     </div>
