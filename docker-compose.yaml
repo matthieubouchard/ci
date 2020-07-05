@@ -1,0 +1,23 @@
+version: '3'
+services: 
+  client:
+    stdin_open: true
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/app/node_modules # bookmark ref to nodemods in container
+      - .:/usr/app # update changes made to app
+  client_test:
+    stdin_open: true
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/app/node_modules # bookmark ref to nodemods in container
+      - .:/usr/app # update changes made to app
+    command: ["npm", "run", "test"]
+
+
