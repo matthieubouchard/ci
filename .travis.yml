@@ -1,0 +1,26 @@
+# need docker
+# build with Dockerfile.dev
+# tell how to run test suite
+# tell how to deploy to aws
+
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build  -t matthewbouchard/docker-workflow -f Dockerfile.dev .
+script:
+  - docker run -e CI=true matthewbouchard/docker-workflow npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-workflow"
+  env: "DockerWorkflow-env"
+  bucket_name: "elasticbeanstalk-us-west-2-453928903836"
+  bucket_path: "docker-workflow"
+  on:
+    branch: master
+   access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
+ 
